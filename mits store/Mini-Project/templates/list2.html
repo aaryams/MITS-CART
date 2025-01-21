@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Students</title>
+    <style>
+        body {
+            background-image: url('https://i.pinimg.com/736x/f8/0e/4a/f80e4a8cf8b5f66eb041f62d7c52583e.jpg'); /* Replace with your image URL */
+            background-size: cover; /* Cover the entire viewport */
+            background-attachment: fixed; /* Keep the background fixed during scrolling */
+            background-position: center; /* Center the background image */
+            color: rgb(12, 12, 12); /* Change text color to white for better contrast */
+        }
+        table {
+            width: 100%;
+            background: rgba(247, 245, 245, 0.8); /* Semi-transparent white background for the table */
+            border-radius: 10px; /* Rounded corners for the table */
+            overflow: hidden; /* Ensure rounded corners are applied */
+        }
+        th, td {
+            border-style: double; 
+            border-color: black;
+            text-align: center;
+            padding: 10px;
+        }
+        th {
+            background: white;
+            color: black;
+            border-collapse: collapse;
+        }
+        td {
+            background: white;
+            border-collapse: collapse;
+        }
+        li {
+            text-align: center;
+            list-style-type: none;
+        }
+        a {
+            color: rgb(251, 251, 251);
+            text-decoration: none;
+        }
+        .delete-button {
+            background-color: rgb(126, 124, 124);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>MUT ID</th>
+            <th>Service</th>
+            <th>Print Type</th>
+            <th>Print Size</th>
+            <th>Print Option</th>
+            <th>No. of Copies</th>
+            <th>Uploaded File</th>
+            <th>Actions</th> <!-- New column for actions -->
+        </tr>
+        {% for row in rows %}
+        <tr>
+            <td>{{ row['name'] }}</td> <!-- MUT ID -->
+            <td>{{ row['father'] }}</td>
+            <td>{{ row['num'] }}</td>
+            <td>{{ row['email'] }}</td>
+            <td>{{ row['rank'] }}</td>
+            <td>{{ row['telephone'] }}</td>
+            <td>{{ row['file'] }}</td>
+            <td>
+                <form action="{{ url_for('delete_student', name=row['name']) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="delete-button">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>    
+    <br>
+    <li><a href="{{ url_for('admin') }}">GO TO HOME</a></li>
+</body>
+</html>

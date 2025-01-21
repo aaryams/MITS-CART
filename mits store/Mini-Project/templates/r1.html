@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Page</title>
+  <style>
+    body {
+      background-image: url('https://i.pinimg.com/736x/f8/0e/4a/f80e4a8cf8b5f66eb041f62d7c52583e.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+    }
+    h1 {
+      color: rgb(255, 252, 252);
+      font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+    }
+    .formgroup {
+      background: white;
+      opacity: 0.7;
+      padding: 20px;
+      border-radius: 5px;
+      max-width: 400px;
+      margin: auto;
+     /* clip-path: polygon(0 10%, 10% 0, 90% 0, 100% 10%, 100% 100%, 0 100%); /* Custom shape */
+    }
+    .formgroup label {
+      color: black;
+      display: block;
+      margin: 10px 0 5px;
+    }
+    .formgroup select, .formgroup input[type='number'], .formgroup input[type='file'] {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      background-color: white;
+    }
+    .formgroup input[type='submit'] {
+      margin: 5px;
+      width: 100px;
+      height: 27px;
+      font-size: 16px;
+      margin: 10px auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <!-- Main form structure -->
+  <form class="myform" action="/reg" method="POST" enctype="multipart/form-data">
+    <h1 style="text-align: center;">YOUR SERVICES</h1>
+    <div class="formgroup">
+
+      <!-- Input for MUT ID -->
+      <label><b>MUT ID</b></label>
+      <input type="text" name="name" placeholder="Enter your MUT ID" required>
+
+      <!-- Dropdown for Service selection -->
+      <label><b>Service</b></label>
+      <select name="father">
+        <option value="Print">Print</option>
+        <option value="Photostat">Photostat</option>
+      </select>
+
+      <!-- Dropdown for Print Type -->
+      <label><b>Print Type</b></label>
+      <select name="num">
+        <option value="Black and White">Black and White</option>
+        <option value="Colour">Colour</option>
+      </select>
+
+      <!-- Dropdown for Print Size -->
+      <label><b>Print Size</b></label>
+      <select name="email">
+        <option value="A4">A4</option>
+        <option value="Legal">Legal</option>
+      </select>
+
+      <!-- Dropdown for Print Option -->
+      <label><b>Print Option</b></label>
+      <select name="rank">
+        <option value="Single Side">Single Side</option>
+        <option value="Double Side">Double Side</option>
+      </select>
+
+      <!-- Input for number of copies -->
+      <label><b>No of Copies</b></label>
+      <input type="number" name="telephone" placeholder="Enter no of copies" required>
+
+      <!-- Input for file upload -->
+      <label><b>Upload File</b></label>
+      <input type="file" name="file" required> <!-- Added file input -->
+
+      <!-- Submit button -->
+      <input type="submit" value="Proceed"> <!-- Fixed input type -->
+    </div>
+  </form>
+</body>
+</html>

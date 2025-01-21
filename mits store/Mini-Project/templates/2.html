@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>MITS STORE - Student</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Numans');
+
+    html, body {
+      background-image: url('https://i.pinimg.com/736x/f8/0e/4a/f80e4a8cf8b5f66eb041f62d7c52583e.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 100%;
+      font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      margin: 0;
+    }
+
+    .sidebar {
+      height: 100%;
+      width: 250px;
+      position: fixed;
+      background-color: #d7d4d4;
+      padding-top: 20px;
+      color: rgb(170, 30, 30);
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      font-family: 'Times New Roman', Times, serif;
+      color: rgb(8, 8, 8);
+    }
+
+    .sidebar a {
+      padding: 10px 15px;
+      text-decoration: none;
+      font-size: 18px;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      color: rgb(4, 4, 4);
+      display: block;
+    }
+
+    .sidebar a:hover {
+      background-color: #807b7b;
+    }
+
+    .main-content {
+      margin-left: 260px; /* Space for the sidebar */
+      padding: 20px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      color:#d7d4d4;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+
+<div class="sidebar">
+  <h2>MITS STORE</h2>
+  <a href="{{ url_for('student') }}">Home</a>
+  <a href="{{ url_for('about') }}">About Us</a>
+  <a href="{{ url_for('register') }}">Services</a>
+  <a href="{{ url_for('stationary') }}">Stationary</a>
+  <a href="{{ url_for('signout') }}">Sign Out</a>
+</div>
+
+<div class="main-content">
+  <br>
+  <br>
+  <h1 align="center"><b>WELCOME TO MITS STORE</b></h1>
+  <p></p>
+</div>
+
+</body>
+</html>
