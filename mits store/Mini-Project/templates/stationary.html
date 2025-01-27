@@ -269,12 +269,43 @@
         <main>
             <div class="product-grid" id="product-grid">
                 <div class="product-card">
-                    <img src="{{ url_for('static', filename='images/pens.jpg') }}" alt="Pens">
-                    <h2>Pens</h2>
+                    <img src="{{ url_for('static', filename='images/cello_blue.jpg') }}" alt="Pens">
+                    <h2>Cello black</h2>
                     <p class="price">₹5.00</p>
                     <input type="number" class="quantity-input" id="quantity-pens" value="0" min="0" onchange="toggleButton('add-to-cart-pens', this.value)">
                     <button id="add-to-cart-pens" onclick="addToCart('Pens', 5.00, document.getElementById('quantity-pens').value)" disabled>Add to Cart</button>
                 </div>
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename='images/cello_black.jpg') }}" alt="Pens">
+                    <h2>Cello blue</h2>
+                    <p class="price">₹5.00</p>
+                    <input type="number" class="quantity-input" id="quantity-pens" value="0" min="0" onchange="toggleButton('add-to-cart-pens', this.value)">
+                    <button id="add-to-cart-pens" onclick="addToCart('Pens', 5.00, document.getElementById('quantity-pens').value)" disabled>Add to Cart</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename='images/lexi_blue.jpg') }}" alt="Pens">
+                    <h2>Lexi blue</h2>
+                    <p class="price">₹5.00</p>
+                    <input type="number" class="quantity-input" id="quantity-pens" value="0" min="0" onchange="toggleButton('add-to-cart-pens', this.value)">
+                    <button id="add-to-cart-pens" onclick="addToCart('Pens', 5.00, document.getElementById('quantity-pens').value)" disabled>Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename='images/lexi_black.jpg') }}" alt="Pens">
+                    <h2>Lexi black</h2>
+                    <p class="price">₹5.00</p>
+                    <input type="number" class="quantity-input" id="quantity-pens" value="0" min="0" onchange="toggleButton('add-to-cart-pens', this.value)">
+                    <button id="add-to-cart-pens" onclick="addToCart('Pens', 5.00, document.getElementById('quantity-pens').value)" disabled>Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename='images/lexi_red.jpg') }}" alt="Pens">
+                    <h2>Lexi red</h2>
+                    <p class="price">₹5.00</p>
+                    <input type="number" class="quantity-input" id="quantity-pens" value="0" min="0" onchange="toggleButton('add-to-cart-pens', this.value)">
+                    <button id="add-to-cart-pens" onclick="addToCart('Pens', 5.00, document.getElementById('quantity-pens').value)" disabled>Add to Cart</button>
+                </div>
+
+
                 <div class="product-card">
                     <img src="{{ url_for('static', filename='images/pencils.jpg') }}" alt="Pencils">
                     <h2>Pencils</h2>
