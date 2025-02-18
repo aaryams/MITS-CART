@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>MITS STORE - Admin</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Numans');
+
+    html, body {
+      background-image: url('https://i.pinimg.com/736x/f8/0e/4a/f80e4a8cf8b5f66eb041f62d7c52583e.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 100%;
+      font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      margin: 0;
+    }
+
+    .sidebar {
+      height: 100%;
+      width: 250px;
+      position: fixed;
+      background-color: #acaaaa;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      padding-top: 20px;
+      color: rgb(3, 3, 3);
+    }
+
+    .sidebar a {
+      padding: 10px 15px;
+      text-decoration: none;
+      font-size: 18px;
+      color: rgb(17, 16, 16);
+      display: block;
+    }
+
+    .sidebar a:hover {
+      background-color: #c2c1c1;
+    }
+
+    .main-content {
+      margin-left: 260px; /* Space for the sidebar */
+      color:#acaaaa;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="sidebar">
+  <h2 style="text-align: center;">MITS STORE</h2>
+  <a href="{{ url_for('admin') }}">Home</a>
+  <a href="{{ url_for('about') }}">About Us</a>
+  <a href="{{ url_for('list2') }}">Order Details</a>
+  <a href="{{ url_for('cutoff') }}">Student Details</a>
+  <a href="{{ url_for('signout') }}">Sign Out</a>
+</div>
+
+<div class="main-content">
+  <h3>Welcome To MITS STORE</h3>
+  <p>Your main content goes here.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stationary Store</title>
+    <style>
+        /* Basic styles for the body */
+        body {
+            background-image: url('https://i.pinimg.com/736x/f8/0e/4a/f80e4a8cf8b5f66eb041f62d7c52583e.jpg');
+            background-size: cover;
+            background-color: #f5f5f5;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header styles */
+        header {
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header nav {
+            display: flex; /* Use flexbox for alignment */
+            justify-content: flex-end; /* Align items to the right */
+            align-items: center; /* Align items vertically */
+            margin-top: 10px;
+        }
+
+        header nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        header nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Cart icon styles */
+        .cart-icon {
+            margin-right: 20px; /* Space between cart icon and back link */
+            font-size: 1.4em;
+            font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Notification styles */
+        .notification {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+
+        /* Container for sidebar and main content */
+        .container {
+            display: flex;
+            margin: 20px;
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            width: 250px;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-right: 20px;
+        }
+
+        .sidebar h3 {
+            margin-top: 0;
+        }
+
+        /* Search bar styles */
+        .search-bar {
+            width: 80%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+        }
+
+        /* Product grid styles */
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping to the next line */
+            gap: 20px;
+            flex-grow: 1;
+        }
+
+        /* Individual product card styles */
+        .product-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+            width: 200px; /* Fixed width for uniformity */
+            height: 250px; /* Fixed height for uniformity */
+            display: flex;
+            flex-direction: column; /* Stack items vertically */
+            justify-content: space-between; /* Space out items */
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: 100px; /* Fixed height for images */
+            object-fit: fill; /* Maintain aspect ratio */
+            border-radius: 5px;
+        }
+
+        .product-card h2 {
+            font-size: 1.0em;
+            margin: 10px 0;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        .price {
+            color: #b12704;
+            font-size: 1.5em;
+            margin: 10px 0;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        /* Quantity input styles */
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            margin: 5px 0;
+        }
+
+        /* Button styles */
+        button {
+            background-color: #ffa41c;
+            border: none;
+            border-radius: 2px;
+            color: white;
+            padding: 5px 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ff8c00;
+        }
+
+        /* Footer styles */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Cart Modal Styles */
+        .cart-modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
+
+        .cart-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 20px;
+            
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+
+        .remove-button {
+            background-color: red;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .remove-button:hover {
+            background-color: darkred;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-controls button {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to MITS Cart</h1>
+        <nav>
+            <span class="cart-icon" onclick="openCart()">🛒 Cart (<span id="cart-count">0</span>)</span>
+            <a href="{{ url_for('back') }}">Back to Home</a>
+        </nav>
+    </header>
+
+    <div class="notification" id="notification"></div>
+    
+    <div class="container">
+        <div class="sidebar">
+            <h3>Categories</h3>
+            <select class="search-bar" onchange="filterProducts(this.value)">
+            <option value="">All Items</option>
+            <option value="Pens">Pens</option>
+            <option value="Pencils">Pencils</option>
+            <option value="Notebooks">Notebooks</option>
+            <option value="Markers">Markers</option>
+            <option value="Folders">Folders</option>
+            <option value="Records">Records</option>
+            <option value="Snacks">Snacks</option>
+            </select>
+        </div>
+
+        <main>
+            <div class="product-grid" id="product-grid">
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename='images/cello_blue.jpg') }}" alt="Pens">
+                    <h2>Cello black</h2>
+                    <p class="price">₹5.00</p>
+                    <input type="number" class="quantity-input" id="quantity-pens" value="0" min="0" onchange="toggleButton('add-to-cart-pens', this.value)">
+                    <button id="add-to-cart-pens" onclick="addToCart('Pens', 5.00, document.getElementById('quantity-pens').value)" disabled>Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename='images/cello_black.jpg') }}" alt="Pens">
+                    <h2>Cello blue</h2>
+                    <p class="price">₹5.00</p>
+                    <input type="number" class="quantity-input" id="quantity-pens" value="0" min="0" onchange="toggleButton('add-to-cart-pens', this.value)">
+                    <button id="add-to-cart-pens" onclick="addToCart('Pens', 5.00, document.getElementById('quantity-pens').value)" disabled>Add to Cart</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename='images/lexi_blue.jpg') }}" alt="Pens">
+                    <h2>Lexi blue</h2>
+                    <p class="price">₹5.00</p>
+                    <input type="number" class="quantity-input" id="quantity-pens" value="0" min="0" onchange="toggleButton('add-to-cart-pens', this.value)">
+                    <button id="add-to-cart-pens" onclick="addToCart('Pens', 5.00, document.getElementById('quantity-pens').value)" disabled>Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename='images/lexi_black.jpg') }}" alt="Pens">
+                    <h2>Lexi black</h2>
+                    <p class="price">₹5.00</p>
+                    <input type="number" class="quantity-input" id="quantity-pens" value="0" min="0" onchange="toggleButton('add-to-cart-pens', this.value)">
+                    <button id="add-to-cart-pens" onclick="addToCart('Pens', 5.00, document.getElementById('quantity-pens').value)" disabled>Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename='images/lexi_red.jpg') }}" alt="Pens">
+                    <h2>Lexi red</h2>
+                    <p class="price">₹5.00</p>
+                    <input type="number" class="quantity-input" id="quantity-pens" value="0" min="0" onchange="toggleButton('add-to-cart-pens', this.value)">
+                    <button id="add-to-cart-pens" onclick="addToCart('Pens', 5.00, document.getElementById('quantity-pens').value)" disabled>Add to Cart</button>
+                </div>
+
+
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename='images/pencils.jpg') }}" alt="Pencils">
+                    <h2>Pencils</h2>
+                    <p class="price">₹75</p>
+                    <input type="number" class="quantity-input" id="quantity-pencils" value="0" min="0" onchange="toggleButton('add-to-cart-pencils', this.value)">
+                    <button id="add-to-cart-pencils" onclick="addToCart('Pencils', 75, document.getElementById('quantity-pencils').value)" disabled>Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename='images/notebooks.jpg') }}" alt="Notebooks">
+                    <h2>Notebooks</h2>
+                    <p class="price">₹100</p>
+                    <input type="number" class="quantity-input" id="quantity-notebooks" value="0" min="0" onchange="toggleButton('add-to-cart-notebooks', this.value)">
+                    <button id="add-to-cart-notebooks" onclick="addToCart('Notebooks', 100, document.getElementById('quantity-notebooks').value)" disabled>Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename='images/yellow_record.jpg') }}" alt="Yellow Record">
+                    <h2>Yellow Record</h2>
+                    <p class="price">₹130</p>
+                    <input type="number" class="quantity-input" id="quantity-yellow-record" value="0" min="0" onchange="toggleButton('add-to-cart-yellow-record', this.value)">
+                    <button id="add-to-cart-yellow-record" onclick="addToCart('Yellow Record', 130, document.getElementById('quantity-yellow-record').value)" disabled>Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename='images/pink_record.jpg') }}" alt=" Pink Record">
+                    <h2>Pink Record</h2>
+                    <p class="price">₹130</p>
+                    <input type="number" class="quantity-input" id="quantity-pink-record" value="0" min="0" onchange="toggleButton('add-to-cart-pink-record', this.value)">
+                    <button id="add-to-cart-pink-record" onclick="addToCart('Pink Record', 130, document.getElementById('quantity-pink-record').value)" disabled>Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename='images/tutorial_notebooks.jpg') }}" alt="Tutorial Notebooks">
+                    <h2>Tutorial Notebooks</h2>
+                    <p class="price">₹35</p>
+                    <input type="number" class="quantity-input" id="quantity-tutorial-notebooks" value="0" min="0" onchange="toggleButton('add-to-cart-tutorial-notebooks', this.value)">
+                    <button id="add-to-cart-tutorial-notebooks" onclick="addToCart('Tutorial Notebooks', 35, document.getElementById('quantity-tutorial-notebooks').value)" disabled>Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename='images/snacks.jpg') }}" alt="Snacks">
+                    <h2>Snacks</h2>
+                    <p class="price">₹100</p>
+                    <input type="number" class="quantity-input" id="quantity-snacks" value="0" min="0" onchange="toggleButton('add-to-cart-snacks', this.value)">
+                    <button id="add-to-cart-snacks" onclick="addToCart('Snacks', 100, document.getElementById('quantity-snacks').value)" disabled>Add to Cart</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 MITS Cart. All rights reserved.</p>
+    </footer>
+
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-content">
+            <span class="close" onclick="closeCart()">&times;</span>
+            <h2>Your Cart</h2>
+            <div id="cart-items"></div>
+            <div id="cart-total"></div>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+        let totalItems = 0;
+        let totalAmount = 0;
+
+        function toggleButton(buttonId, quantity) {
+            document.getElementById(buttonId).disabled = quantity <= 0;
+        }
+
+        function addToCart(item, price, quantity) {
+            quantity = parseInt(quantity);
+            if (quantity > 0) {
+                const existingItemIndex = cart.findIndex(cartItem => cartItem.item === item);
+                if (existingItemIndex > -1) {
+                    cart[existingItemIndex].quantity += quantity;
+                } else {
+                    cart.push({ item, price, quantity });
+                }
+                totalItems += quantity;
+                totalAmount += price * quantity;
+                document.getElementById('cart-count').innerText = totalItems;
+                showNotification(`${quantity} of ${item} added to the cart.`);
+                updateCart();
+            }
+        }
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.innerText = message;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        function updateCart() {
+            const cartItemsDiv = document.getElementById('cart-items');
+            cartItemsDiv.innerHTML = '';
+            cart.forEach((cartItem, index) => {
+                cartItemsDiv.innerHTML += `
+                    <div class="cart-item">
+                        <span>${cartItem.quantity} x ${cartItem.item} (₹${cartItem.price})</span>
+                        <div class="quantity-controls">
+                            <button onclick="changeQuantity(${index}, 1)">+</button>
+                            <button onclick="changeQuantity(${index}, -1)">-</button>
+                        </div>
+                        <button class="remove-button" onclick="removeFromCart(${index})">Remove</button>
+                    </div>
+                `;
+            });
+            document.getElementById('cart-total').innerText = `Total: ₹${totalAmount}`;
+        }
+
+        function changeQuantity(index, change) {
+            const cartItem = cart[index];
+            if (cartItem.quantity + change > 0) {
+                cartItem.quantity += change;
+                totalItems += change;
+                totalAmount += cartItem.price * change;
+                document.getElementById('cart-count').innerText = totalItems;
+                updateCart();
+            }
+        }
+
+ 
+        function removeFromCart(index) {
+            const cartItem = cart[index];
+            totalItems -= cartItem.quantity;
+            totalAmount -= cartItem.price * cartItem.quantity;
+            cart.splice(index, 1);
+            document.getElementById('cart-count').innerText = totalItems;
+            updateCart();
+        }
+
+        function openCart() {
+            document.getElementById('cart-modal').style.display = 'block';
+            updateCart();
+        }
+
+        function closeCart() {
+            document.getElementById('cart-modal').style.display = 'none';
+        }
+
+        function filterProducts(searchTerm) {
+            const productCards = document.querySelectorAll('.product-card');
+            productCards.forEach(card => {
+                const productName = card.querySelector('h2').innerText.toLowerCase();
+                if (productName.includes(searchTerm.toLowerCase())) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

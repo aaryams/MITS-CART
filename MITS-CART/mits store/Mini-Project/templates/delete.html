@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Students</title>
+    <style>
+        table {
+            width: 100%;
+        }
+        th, td {
+            border-style: double; 
+            border-color: black;
+            text-align: center;
+            padding: 10px;
+        }
+        th {
+            background: white;
+            color: black;
+            border-collapse: collapse;
+        }
+        td {
+            background: white;
+            border-collapse: collapse;
+        }
+        li {
+            text-align: center;
+            list-style-type: none;
+        }
+        a {
+            color: rgb(200, 100, 100);
+            text-decoration: none;
+        }
+        .delete-button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body style="background: white;">
+    <table>
+        <tr>
+            <th>MUT ID</th>
+            <th>Service</th>
+            <th>Print Type</th>
+            <th>Print Size</th>
+            <th>Print Option</th>
+            <th>No.of copies</th>
+            <th>Uploaded File</th>
+            <th>Action</th> <!-- New column for actions -->
+        </tr>
+        {% for row in rows %}
+        <tr>
+            <td>{{ row['name'] }}</td>
+            <td>{{ row['father'] }}</td>
+            <td>{{ row['num'] }}</td>
+            <td>{{ row['email'] }}</td>
+            <td>{{ row['rank'] }}</td>
+            <td>{{ row['telephone'] }}</td>
+            <td>{{ row['file'] }}</td>
+            <td>
+                <form action="{{ url_for('delete_student', name=row['name']) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="delete-button">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>    
+    <br>
+    <li><a href="{{ url_for('admin') }}">GO TO HOME</a></li>
+</body>
+</html>
